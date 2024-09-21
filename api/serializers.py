@@ -152,13 +152,13 @@ class GetProductsInShoppingCartSerializer(serializers.ModelSerializer):
     def validate_total_amount(self, value):
         if value < const.PRODUCTS_IN_SHOPPING_CART_MIN_COUNT:
             raise serializers.ValidationError(
-                const.PRODUCTS_IN_SHOPPING_CART_MIN_COUNT
+                const.PRODUCTS_IN_SHOPPING_CART_MIN_COUNT_ERROR
             )
         return value
 
     def validate_total_price(self, value):
         if value < const.PRODUCTS_IN_SHOPPING_CART_MIN_SUM:
             raise serializers.ValidationError(
-                const.PRODUCTS_IN_SHOPPING_CART_MIN_SUM
+                const.PRODUCTS_IN_SHOPPING_CART_MIN_SUM_ERROR
             )
         return value

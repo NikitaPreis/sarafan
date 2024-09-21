@@ -86,6 +86,7 @@ class ProductImagesDesktop(models.Model):
         verbose_name_plural = '«Изображения продуктов»'
 
     def save(self, *args, **kwargs):
+        """Сохраняет изображение в трех размерах."""
         self.image_detail.name = get_uuid_image_name()
         super().save(*args, **kwargs)
         output_size_list = (const.PRODUCT_IMAGE_LIST_HEIGTH,

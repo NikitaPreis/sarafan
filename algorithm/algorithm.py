@@ -16,5 +16,6 @@ def main():
     create_seq(15)
     create_seq(30)
 
+
 if __name__ == '__main__':
     main()

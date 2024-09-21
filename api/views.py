@@ -24,7 +24,6 @@ class ProductViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     permission_classes = (permissions.AllowAny,)
-    pagination_class = None
 
     @action(methods=['post', 'patch', 'delete'], detail=True,
             permission_classes=(CustomerShoppingCartAccess,))
