@@ -139,5 +139,5 @@ dmypy.json
 .vscode
 
 static/
-media/
+# media/
 static_dev/
