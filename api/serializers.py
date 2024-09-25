@@ -62,9 +62,9 @@ class ShoppingCartSerializer(serializers.ModelSerializer):
 
 
 class ProductImagesSerializer(serializers.ModelSerializer):
-    image_detail = Base64ImageField(read_only=True)
-    image_list = Base64ImageField(read_only=True)
-    image_thumbnail = Base64ImageField(read_only=True)
+    image_detail = serializers.ImageField(read_only=True)
+    image_list = serializers.ImageField(read_only=True)
+    image_thumbnail = serializers.ImageField(read_only=True)
 
     class Meta:
         model = ProductImagesDesktop
@@ -84,6 +84,15 @@ class ProductSerializer(serializers.ModelSerializer):
                   'price', 'images')
 
 
+class ImageThumbnailRelatedField(serializers.RelatedField):
+    def to_representation(self, instance):
+        url = instance.image_thumbnail.url
+        request = self.context.get('request', None)
+        if request is not None:
+            return request.build_absolute_uri(url)
+        return url
+
+
 class GetShoppingCartSerializer(serializers.ModelSerializer):
     id = serializers.PrimaryKeyRelatedField(
         read_only=True,
@@ -101,11 +110,17 @@ class GetShoppingCartSerializer(serializers.ModelSerializer):
         read_only=True,
         source='product.price'
     )
+    image = ImageThumbnailRelatedField(
+        read_only=True,
+        many=True,
+        allow_null=True,
+        source='product.product_images_desktop'
+    )
 
     class Meta:
         model = ShoppingCart
         fields = ('id', 'name', 'slug',
-                  'amount', 'price')
+                  'amount', 'price', 'image')
 
 
 class ProductAndAmountSerializer(serializers.ModelSerializer):

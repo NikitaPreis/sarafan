@@ -1,9 +1,9 @@
 import os
 from uuid import uuid4
 
+from core import constants as const
 from PIL import Image as Img
 
-from core import constants as const
 from sarafan.settings import BASE_DIR
 
 

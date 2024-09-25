@@ -33,12 +33,13 @@ class SubcategoryAdmin(admin.ModelAdmin):
 
 
 class ProductImagesDesktopInLine(admin.StackedInline):
+    fields = ('image_detail',)
     model = ProductImagesDesktop
     extra = 1
 
 
 class ProductImagesDesktopAdmin(admin.ModelAdmin):
-    list_display = ('image_detail', 'image_list', 'image_thumbnail')
+    list_display = ('product', 'image_detail', 'image_list', 'image_thumbnail')
 
 
 class ProductAdmin(admin.ModelAdmin):

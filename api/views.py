@@ -79,13 +79,14 @@ class ProductViewSet(viewsets.ReadOnlyModelViewSet):
         customer_shopping_cart = get_customer_shopping_cart_with_products(
             request.user
         )
-        total_amount_and_price = get_shopping_cart_total_price_and_amount(
+        context = get_shopping_cart_total_price_and_amount(
             customer_shopping_cart
         )
+        context['request'] = request
         if customer_shopping_cart.exists():
             serializer = GetProductsInShoppingCartSerializer(
                 customer_shopping_cart,
-                context=total_amount_and_price
+                context=context
             )
             return Response(serializer.data)
         return Response(

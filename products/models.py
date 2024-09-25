@@ -57,6 +57,7 @@ class ProductImagesDesktop(models.Model):
     product = models.ForeignKey(Product,
                                 on_delete=models.CASCADE,
                                 null=True,
+                                verbose_name='Продукт',
                                 related_name='product_images_desktop')
     image_detail = models.ImageField(
         upload_to='products/detail/images/',
